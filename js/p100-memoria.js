@@ -104,7 +104,10 @@ $(function () {
 });
 
 function handleTooManyClicks() {
-    $("#exampleModalButton").prop("disabled", false);
+        // Habilitar el botón modal
+        $("#exampleModalButton").prop("disabled", false);
+        // Mostrar el botón modal si está oculto
+        $("#exampleModalButton").show();
 }
     
     var parelles = (nFiles * nColumnes) / 2;
