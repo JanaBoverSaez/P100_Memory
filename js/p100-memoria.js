@@ -7,6 +7,7 @@ var nFiles = 3,
 var nClicks = 0;
 var nMaxClicks;
 
+
 // Funcio per guardar totes les cartes en un array
 function cartes() {
     var cartes = [];
