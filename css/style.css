@@ -41,6 +41,21 @@
     justify-content: center;
 }
 
+/* CSS NUMCLICKS */
+#numclicks {
+    width: 100px;
+    height: 25px;
+    font-size: 25px;
+    color: #FFFFFF;
+    font-family: 'Times New Roman', Times, serif;
+    background: #232 url(../images/table.jpg);
+    margin: 0 auto;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    justify-content: center;
+}
+
 /* CSS GAME */
 body {
     text-align: center;

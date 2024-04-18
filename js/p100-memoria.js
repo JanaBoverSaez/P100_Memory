@@ -3,8 +3,10 @@ var separacioH = 20,
     separacioV = 20;
 var nFiles = 3,
     nColumnes = 6;
+var nClicks = 0;
+var nMaxClicks;
 
-// Funció per guardar totes les cartes en un array
+// Funcio per guardar totes les cartes en un array
 function cartes() {
     var cartes = [];
     for (var i = 1; i <= 52; i++) {
@@ -13,12 +15,12 @@ function cartes() {
     return cartes;
 }
 
-// Funció per generar les parelles de cartes del joc
+// Funcio per generar les parelles de cartes del joc
 function jocCartes() {
     var cartesJoc = cartes();
     var cartesEscollides = [];
 
-    // Escollir aleatòriament la meitat de les cartes de les quals disposa el taulell
+    // Escollir aleatoriament la meitat de les cartes de les quals disposa el taulell
     for (var i = 0; i < (nFiles * nColumnes / 2); i++) {
         var randomIndex = Math.floor(Math.random() * cartesJoc.length);
         cartesEscollides.push(cartesJoc.splice(randomIndex, 1)[0]); // Seleccionar la carta seleccionada de l'array de cartes
@@ -36,7 +38,7 @@ $(function () {
         "height": (nFiles * (alcadaCarta + separacioV) + separacioV) + "px"
     });
 
-    // Funció per barrejar l'array de cartes
+    // Funcio per barrejar l'array de cartes
     function barrejar(array) {
         for (var i = array.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
@@ -66,6 +68,19 @@ $(function () {
 
     $(".carta").on("click", function () {
         $(this).toggleClass("carta-girada");
+
+        nMaxClicks = 3 * nFiles * nColumnes;
+
+        nClicks++;
+
+        var elemento = document.getElementById("numclicks");
+        elemento.innerHTML = nClicks + " / " + nMaxClicks; 
+
+        if (nClicks == nMaxClicks) {
+            alert("Has perdut! Has fet masses clicks.");
+            // JanaB: Falta fer que l'Ãºltim click pot resoldre el joc
+            // JanaB: Afegir possibilitat de fer nova partida
+        }
     });
 });
 
