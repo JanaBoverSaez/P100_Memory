@@ -97,4 +97,93 @@ $(function () {
         }
     });
 });
+=======
+    
+    var parelles = (nFiles * nColumnes) / 2;
+    document.getElementById("parelles").textContent = parelles;
+>>>>>>> 96205515ad5dbce9dc12328ca560f6b68027b205
 
+    var cartesSeleccionades = null;
+    var cartaAnterior = null;
+    var cartesGirades = 0;
+    var clicks = 0
+
+    $('.carta').on('click', function () {
+        click();
+
+        // Comprovem si ja s'ha trobat parella per aquesta carta
+        if ($(this).hasClass('parella-trobada') || $(this).hasClass('carta-girada') || cartesGirades >= 2) return;
+
+        $(this).toggleClass('carta-girada');
+        cartesGirades++;  
+
+        // Controlem els clicks de l'usuari
+        if (clicks === (3 * (nFiles * nColumnes))) {
+            fiJoc();
+        }
+
+        if (cartaAnterior === null) {
+            // Si no tenim cap carta seleccionada, hi guardem l'actual
+            cartaAnterior = $(this);
+        } else {
+            // Comprovem si l'usuari ha clicat a la mateixa carta
+            if (cartaAnterior.is($(this))) {
+                // Si l'usuari ha clicat a la mateixa carta, no fem res
+                return;
+            }
+
+            // Comprovem si fan parella
+            if ($(this).find('.davant').attr('class') === cartaAnterior.find('.davant').attr('class')) {
+                // Si son parella, marquem les cartes com a parella trobada
+                $(this).addClass('parella-trobada');
+                cartaAnterior.addClass('parella-trobada');
+                parella();
+                cartaAnterior = null;
+                cartesGirades = 0; // Reiniciem el comptador de cartes girades en aquest torn
+                if (parelles === 0) {
+                    fiJoc();
+                }
+            } else {
+                // Si no son parella, tornem a girar les cartes de nou
+                setTimeout(() => {
+                    $(this).toggleClass('carta-girada');
+                    cartaAnterior.toggleClass('carta-girada');
+                    cartaAnterior = null;
+                    cartesGirades = 0; // Reiniciem el comptador de cartes girades en aquest torn
+                }, 800);
+            }
+        }
+    });
+
+    function parella() {
+        parelles--;
+        document.getElementById("parelles").textContent = parelles;
+    }
+
+    function click() {
+        clicks++;
+        document.getElementById("clicks").textContent = clicks;
+    }
+
+    var segons = -1;
+    var minuts = 0;
+    function setCounter() {
+        segons++;
+        if (segons === 60) {
+            segons = 0;
+            minuts++;
+        }
+        // Formatejem els minuts i els segons amb dos d�gits
+        var minutosStr = minuts < 10 ? "0" + minuts : minuts;
+        var segundosStr = segons < 10 ? "0" + segons : segons;
+        var l = document.getElementById("contador");
+        l.innerHTML = minutosStr + ":" + segundosStr;
+    }
+    function startCounter() {
+        setCounter();
+        setInterval(setCounter, 1000);
+    }
+    document.getElementById('low').addEventListener('click', startCounter);
+    document.getElementById('medium').addEventListener('click', startCounter);
+    document.getElementById('high').addEventListener('click', startCounter);
+});
