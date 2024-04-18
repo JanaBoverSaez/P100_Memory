@@ -3,8 +3,13 @@ var separacioH = 20,
     separacioV = 20;
 var nFiles = 3,
     nColumnes = 6;
+<<<<<<< Updated upstream
 var nClicks = 0;
 var nMaxClicks;
+=======
+var jocCartes = [];
+var controlClicks = 0;
+>>>>>>> Stashed changes
 
 // Funcio per guardar totes les cartes en un array
 function cartes() {
@@ -68,6 +73,7 @@ $(function () {
 
     $(".carta").on("click", function () {
         $(this).toggleClass("carta-girada");
+<<<<<<< Updated upstream
 
         nMaxClicks = 3 * nFiles * nColumnes;
 
@@ -80,6 +86,14 @@ $(function () {
             alert("Has perdut! Has fet masses clicks.");
             // JanaB: Falta fer que l'últim click pot resoldre el joc
             // JanaB: Afegir possibilitat de fer nova partida
+=======
+        controlClicks++; 
+        if (controlClicks == nFiles * nColumnes * 3){ 
+            // JanaB: almenys que quedi només una carta
+            alert ("Has perdut! Has fet masses clics.");
+
+            // JanaB: permetre jugar nova partida
+>>>>>>> Stashed changes
         }
     });
 });
