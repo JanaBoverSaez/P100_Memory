@@ -188,7 +188,7 @@ function handleTooManyClicks() {
         var minutosStr = minuts < 10 ? "0" + minuts : minuts;
         var segundosStr = segons < 10 ? "0" + segons : segons;
         var l = document.getElementById("contador");
-        l.innerHTML = minutosStr + ":" + segundosStr;
+        l.innerHTML = "Temps:" +  minutosStr + ":" + segundosStr;
     }
     function startCounter() {
         setCounter();
