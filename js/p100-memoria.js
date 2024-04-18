@@ -95,13 +95,17 @@ $(function () {
         elemento.innerHTML = nClicks + " / " + nMaxClicks; 
 
         if (nClicks == nMaxClicks) {
-            alert("Has perdut! Has fet masses clicks.");
+            handleTooManyClicks();
+            
             // JanaB: Falta fer que l'últim click pot resoldre el joc
             // JanaB: Afegir possibilitat de fer nova partida
         }
     });
 });
 
+function handleTooManyClicks() {
+    $("#exampleModalButton").prop("disabled", false);
+}
     
     var parelles = (nFiles * nColumnes) / 2;
     document.getElementById("parelles").textContent = parelles;
