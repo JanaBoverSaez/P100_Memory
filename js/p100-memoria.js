@@ -1,4 +1,5 @@
 var ampladaCarta, alcadaCarta;
+<<<<<<< HEAD
 var separacioH = 20,
     separacioV = 20;
 var nFiles = 3,
@@ -10,6 +11,10 @@ var nMaxClicks;
 var jocCartes = [];
 var controlClicks = 0;
 >>>>>>> Stashed changes
+=======
+var separacioH = 20, separacioV = 20;
+var nFiles = 3, nColumnes = 6;
+>>>>>>> 96205515ad5dbce9dc12328ca560f6b68027b205
 
 // Funcio per guardar totes les cartes en un array
 function cartes() {
@@ -28,10 +33,22 @@ function jocCartes() {
     // Escollir aleatoriament la meitat de les cartes de les quals disposa el taulell
     for (var i = 0; i < (nFiles * nColumnes / 2); i++) {
         var randomIndex = Math.floor(Math.random() * cartesJoc.length);
-        cartesEscollides.push(cartesJoc.splice(randomIndex, 1)[0]); // Seleccionar la carta seleccionada de l'array de cartes
+        // Seleccionar la carta seleccionada de l'array de cartes
+        cartesEscollides.push(cartesJoc.splice(randomIndex, 1)[0]); 
     }
     // Dupliquem les cartes seleccionades per formar les parelles
     return cartesEscollides.concat(cartesEscollides);
+}
+
+// Funció per barrejar l'array de cartes
+function barrejar(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
 }
 
 $(function () {
@@ -42,6 +59,7 @@ $(function () {
         "width": (nColumnes * (ampladaCarta + separacioH) + separacioH) + "px",
         "height": (nFiles * (alcadaCarta + separacioV) + separacioV) + "px"
     });
+<<<<<<< HEAD
 
     // Funcio per barrejar l'array de cartes
     function barrejar(array) {
@@ -53,6 +71,11 @@ $(function () {
         }
         return array;
     }
+=======
+    $("#contenidor").css({
+        "width": (nColumnes * (ampladaCarta + separacioH) + separacioH) + "px",
+    });
+>>>>>>> 96205515ad5dbce9dc12328ca560f6b68027b205
 
     var cartesJoc = jocCartes();
     cartesJoc = barrejar(cartesJoc);
@@ -71,6 +94,7 @@ $(function () {
         }
     }
 
+<<<<<<< HEAD
     $(".carta").on("click", function () {
         $(this).toggleClass("carta-girada");
 <<<<<<< Updated upstream
@@ -173,7 +197,7 @@ $(function () {
             segons = 0;
             minuts++;
         }
-        // Formatejem els minuts i els segons amb dos dï¿½gits
+        // Formatejem els minuts i els segons amb dos dígits
         var minutosStr = minuts < 10 ? "0" + minuts : minuts;
         var segundosStr = segons < 10 ? "0" + segons : segons;
         var l = document.getElementById("contador");
