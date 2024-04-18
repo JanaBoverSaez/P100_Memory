@@ -1,20 +1,11 @@
 var ampladaCarta, alcadaCarta;
-<<<<<<< HEAD
+
 var separacioH = 20,
     separacioV = 20;
 var nFiles = 3,
     nColumnes = 6;
-<<<<<<< Updated upstream
 var nClicks = 0;
 var nMaxClicks;
-=======
-var jocCartes = [];
-var controlClicks = 0;
->>>>>>> Stashed changes
-=======
-var separacioH = 20, separacioV = 20;
-var nFiles = 3, nColumnes = 6;
->>>>>>> 96205515ad5dbce9dc12328ca560f6b68027b205
 
 // Funcio per guardar totes les cartes en un array
 function cartes() {
@@ -40,7 +31,7 @@ function jocCartes() {
     return cartesEscollides.concat(cartesEscollides);
 }
 
-// Funció per barrejar l'array de cartes
+// Funciï¿½ per barrejar l'array de cartes
 function barrejar(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -59,7 +50,6 @@ $(function () {
         "width": (nColumnes * (ampladaCarta + separacioH) + separacioH) + "px",
         "height": (nFiles * (alcadaCarta + separacioV) + separacioV) + "px"
     });
-<<<<<<< HEAD
 
     // Funcio per barrejar l'array de cartes
     function barrejar(array) {
@@ -71,11 +61,9 @@ $(function () {
         }
         return array;
     }
-=======
     $("#contenidor").css({
         "width": (nColumnes * (ampladaCarta + separacioH) + separacioH) + "px",
     });
->>>>>>> 96205515ad5dbce9dc12328ca560f6b68027b205
 
     var cartesJoc = jocCartes();
     cartesJoc = barrejar(cartesJoc);
@@ -94,10 +82,9 @@ $(function () {
         }
     }
 
-<<<<<<< HEAD
+
     $(".carta").on("click", function () {
         $(this).toggleClass("carta-girada");
-<<<<<<< Updated upstream
 
         nMaxClicks = 3 * nFiles * nColumnes;
 
@@ -110,22 +97,14 @@ $(function () {
             alert("Has perdut! Has fet masses clicks.");
             // JanaB: Falta fer que l'Ãºltim click pot resoldre el joc
             // JanaB: Afegir possibilitat de fer nova partida
-=======
-        controlClicks++; 
-        if (controlClicks == nFiles * nColumnes * 3){ 
-            // JanaB: almenys que quedi nomÃ©s una carta
-            alert ("Has perdut! Has fet masses clics.");
-
-            // JanaB: permetre jugar nova partida
->>>>>>> Stashed changes
         }
     });
 });
-=======
+
     
     var parelles = (nFiles * nColumnes) / 2;
     document.getElementById("parelles").textContent = parelles;
->>>>>>> 96205515ad5dbce9dc12328ca560f6b68027b205
+
 
     var cartesSeleccionades = null;
     var cartaAnterior = null;
@@ -197,7 +176,7 @@ $(function () {
             segons = 0;
             minuts++;
         }
-        // Formatejem els minuts i els segons amb dos dígits
+        // Formatejem els minuts i els segons amb dos dï¿½gits
         var minutosStr = minuts < 10 ? "0" + minuts : minuts;
         var segundosStr = segons < 10 ? "0" + segons : segons;
         var l = document.getElementById("contador");
@@ -210,4 +189,3 @@ $(function () {
     document.getElementById('low').addEventListener('click', startCounter);
     document.getElementById('medium').addEventListener('click', startCounter);
     document.getElementById('high').addEventListener('click', startCounter);
-});
