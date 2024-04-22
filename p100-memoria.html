@@ -1,34 +1,94 @@
 <html lang="cat">
 
 <head>
-    <meta charset="utf-8">
-    <title>Donar la volta a una carta</title>
+    <meta charset="UTF-8">
+    <title>Memory Game</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="./js/jquery-3.7.1.js"></script>
     <script src="./js/p100-memoria.js"></script>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
-    <header>
-        <h1>Memoria cartes - DEMO</h1>
-    </header>
+    <div id="nivells" class="botonsNivells">
+        <h1>MEMORY GAME</h1>
+        <h3>Escull el nivell per començar a jugar</h3>
+        <div id="level-selection">
+            <button id="low" class="button">LOW</button>
+            <button id="medium" class="button">MEDIUM</button>
+            <button id="high" class="button">HIGH</button>
+        </div>
+    </div>
+
+    <div id="contador"> </div>  
+
+    <script>
+        var n = 0;
+        function setCounter() {
+            var l = document.getElementById("contador");
+            l.innerHTML = n;
+            n++;
+        }
+
+        function startCounter() {
+            setCounter();
+            setInterval(setCounter, 1000);
+        }
+
+        document.getElementById('low').addEventListener('click', startCounter);
+        document.getElementById('medium').addEventListener('click', startCounter);
+        document.getElementById('high').addEventListener('click', startCounter);
+    </script>
+
+    <div id="numclicks">0</div>  
+
+    
 
     <div id="tauler">
         <div class="carta" id="f1c1">
-
             <div class="cara davant"></div>
         </div>
 
-
     </div>
+<!-- Button trigger modal -->
+<button  id="exampleModalButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" hidden>
+  Launch demo modal
+</button>
 
-    <footer>
-        <p>Fes clic en una carta per donar-li la volta</p>
-    </footer>
+<!-- Modal -->
 
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+    <script>
+        function mostrarTaulell() {
+            document.getElementById("nivells").style.display = 'none';
+            document.getElementById("tauler").style.display = 'block';
+        }
 
+        document.getElementById('low').addEventListener('click', mostrarTaulell);
+        document.getElementById('medium').addEventListener('click', mostrarTaulell);
+        document.getElementById('high').addEventListener('click', mostrarTaulell);
+    </script>
 </body>
-
 </html>
+
