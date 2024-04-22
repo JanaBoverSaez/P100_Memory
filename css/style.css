@@ -88,8 +88,8 @@ body {
 }
 
 .carta {
-    width: 80px; /* deck */
-    height: 120px; /* deck */
+    width: 80px; /* 80 deck */
+    height: 120px; /* 120 deck */
     position: absolute;
     -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
     transform-style: preserve-3d;
@@ -112,6 +112,8 @@ body {
 
 .darrera {
     background: #999 url(../images/deck.png) 0px -480px; /* deck */
+    width: 100%;
+    height: 100%;
 }
 
 .davant {
