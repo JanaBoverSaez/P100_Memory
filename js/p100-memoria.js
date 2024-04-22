@@ -1,3 +1,4 @@
+
 var ampladaCarta, alcadaCarta;
 
 var separacioH = 20,
@@ -7,6 +8,21 @@ var nFiles = 3,
 var nClicks = 0;
 var nMaxClicks;
 
+
+//JBS: So cartes (afegint mp3 a carpeta sounds Visual Studio)
+const so1 = new Audio('../sounds/gircarta.mp3');
+const so2 = new Audio('../sounds/parella.mp3');
+so1.volume = 1.0;
+so2.volume = 1.0;
+
+function reproduirSo_gircarta() {
+    so1.currentTime = 0; // Reinicia el so al principi
+    so1.play(); // Reprodueix el so
+}
+function reproduirSo_parella() {
+    so2.currentTime = 0; // Reinicia el so al principi
+    so2.play(); // Reprodueix el so
+}
 
 // Funcio per guardar totes les cartes en un array
 function cartes() {
@@ -83,7 +99,7 @@ $(function () {
         }
     }
 
-
+/*
     $(".carta").on("click", function () {
         $(this).toggleClass("carta-girada");
 
@@ -101,6 +117,74 @@ $(function () {
             // JanaB: Afegir possibilitat de fer nova partida
         }
     });
+    */
+   
+    $('.carta').on('click', function () {
+        // JBS: Anul·lem la crida a click()
+        // click();
+
+        // JBS: Crida a so "girar carta"
+        reproduirSo_gircarta();
+
+        // Comprovem si ja s'ha trobat parella per aquesta carta
+        if ($(this).hasClass('parella-trobada') || $(this).hasClass('carta-girada') || cartesGirades >= 2) return;
+
+        $(this).toggleClass('carta-girada');
+        cartesGirades++;  
+
+        // Controlem els clicks de l'usuari
+        if (clicks === (3 * (nFiles * nColumnes))) {
+            fiJoc();
+        }
+        
+        //JBS: cartaAnterior inicialment tenia el valor "undefined"        
+        if ((cartaAnterior === null) || (cartaAnterior === undefined)) {
+            // Si no tenim cap carta seleccionada, hi guardem l'actual
+            cartaAnterior = $(this);
+            // alert ("Here01")
+        } else {
+            // alert ("99")
+            // Comprovem si l'usuari ha clicat a la mateixa carta
+            //alert(Object.is(cartaAnterior, null));
+            // alert(cartaAnterior);
+            // alert(cartaAnterior.find('.davant'));
+             
+            if (cartaAnterior.is($(this))) {
+                // Si l'usuari ha clicat a la mateixa carta, no fem res
+                // alert ("99b")
+                return;
+            }
+            
+            // Comprovem si fan parella
+            //alert($(this).find('.davant').attr('class'))
+            // alert ("100")
+            if ($(this).find('.davant').attr('class') === cartaAnterior.find('.davant').attr('class')) {
+                // Si son parella, marquem les cartes com a parella trobada
+                
+                // JBS: Crida a so "Parella"
+                reproduirSo_parella();
+
+                $(this).addClass('parella-trobada');
+                cartaAnterior.addClass('parella-trobada');
+                parella();
+                cartaAnterior = null;
+                cartesGirades = 0; // Reiniciem el comptador de cartes girades en aquest torn
+                if (parelles === 0) {
+                    fiJoc();
+                }
+            } else {
+                // alert ("102")
+                // Si no son parella, tornem a girar les cartes de nou
+                setTimeout(() => {
+                    $(this).toggleClass('carta-girada');
+                    cartaAnterior.toggleClass('carta-girada');
+                    cartaAnterior = null;
+                    cartesGirades = 0; // Reiniciem el comptador de cartes girades en aquest torn
+                }, 800);
+            }
+        }
+    });
+
 });
 
 function handleTooManyClicks() {
@@ -118,8 +202,9 @@ function handleTooManyClicks() {
     var cartaAnterior = null;
     var cartesGirades = 0;
     var clicks = 0
-
+/*
     $('.carta').on('click', function () {
+        alert ("Here201")
         click();
 
         // Comprovem si ja s'ha trobat parella per aquesta carta
@@ -128,6 +213,7 @@ function handleTooManyClicks() {
         $(this).toggleClass('carta-girada');
         cartesGirades++;  
 
+        alert ("Here101")
         // Controlem els clicks de l'usuari
         if (clicks === (3 * (nFiles * nColumnes))) {
             fiJoc();
@@ -136,7 +222,9 @@ function handleTooManyClicks() {
         if (cartaAnterior === null) {
             // Si no tenim cap carta seleccionada, hi guardem l'actual
             cartaAnterior = $(this);
+            alert ("Here01")
         } else {
+            alert("Here02")
             // Comprovem si l'usuari ha clicat a la mateixa carta
             if (cartaAnterior.is($(this))) {
                 // Si l'usuari ha clicat a la mateixa carta, no fem res
@@ -144,6 +232,7 @@ function handleTooManyClicks() {
             }
 
             // Comprovem si fan parella
+            alert($(this).find('.davant').attr('class'))
             if ($(this).find('.davant').attr('class') === cartaAnterior.find('.davant').attr('class')) {
                 // Si son parella, marquem les cartes com a parella trobada
                 $(this).addClass('parella-trobada');
@@ -165,12 +254,18 @@ function handleTooManyClicks() {
             }
         }
     });
-
+*/
     function parella() {
         parelles--;
+ 
+        //JBS: "parelles" no estava definit al html
         document.getElementById("parelles").textContent = parelles;
     }
-
+  
+    function fiJoc() {
+        alert("Joc finalitzat");
+    }
+  
     function click() {
         clicks++;
         document.getElementById("clicks").textContent = clicks;
@@ -197,3 +292,4 @@ function handleTooManyClicks() {
     document.getElementById('low').addEventListener('click', startCounter);
     document.getElementById('medium').addEventListener('click', startCounter);
     document.getElementById('high').addEventListener('click', startCounter);
+
